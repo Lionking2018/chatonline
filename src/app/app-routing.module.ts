@@ -1,9 +1,18 @@
-import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
+import { AuthGuard } from "./guards/auth/.guard";
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', loadChildren: './home/home.module#HomePageModule' },
+  { path: "", redirectTo: "home", pathMatch: "full" },
+  {
+    path: "home",
+    loadChildren: "./home/home.module#HomePageModule",
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "login",
+    loadChildren: "./componentes/login/login.module#LoginPageModule"
+  }
 ];
 
 @NgModule({
@@ -12,4 +21,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
